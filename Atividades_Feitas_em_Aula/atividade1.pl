@@ -1,0 +1,39 @@
+% -----EXEMPLO DE FAMÍLIA DEMONSTRAR RECURSÃO ------
+
+% Fatos
+
+pai(joao, maria).
+pai(maria, pedro).
+pai(pedro, ana).
+
+% Caso base
+ancestral(X,Y) :- pai(X,Y).
+
+% :- Se ou é verdadeiro quando
+
+% Recursão
+
+% X é ancestral de Y se X é pai de alguém que é ancestral de Y
+
+ancestral(X,Y) :- pai(X,Z), ancestral(Z,Y).
+
+% X é descendente de Y se Y é ancestral de X
+descendente(X, Y) :- ancestral(Y, X).
+
+% -------- FATOS DE REINADO --------
+
+reinou(rhodi, 844, 878).
+reinou(anarawd, 878, 916).
+reinou(hywel_dda, 916, 950).
+reinou(lago_ap_idwal, 950, 979).
+reinou(hywal_ap_ieuaf, 979, 985).
+reinou(cadwallon, 985, 986).
+reinou(maredudd, 986, 999).
+
+% -------- REGRAS DE REINADO --------
+
+principe_no_ano(Ano, Principe) :- % Principe governava no ano se
+	reinou(Principe,Inicio,Fim), % Define a estrutura base para procurar um reinado qualquer
+	Ano >= Inicio, % o ano consultado aconteceu depois d início d reinado.
+	Ano =< Fim. % o ano consultado aconteceu antes d fim d reinado.
+
